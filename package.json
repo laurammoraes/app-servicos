@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/laurammoraes/app-servicos/issues"
   },
-  "homepage": "https://github.com/laurammoraes/app-servicos#readme"
+  "homepage": "https://github.com/laurammoraes/app-servicos#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
