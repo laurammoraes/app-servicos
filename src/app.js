@@ -1,5 +1,5 @@
 const config = require('./config');
-const loaders = require('./loaders')
+const loaders = require('./loaders/auth')
 const express = require('express')
 
 
@@ -9,8 +9,7 @@ async function startServer(){
 
 const app = express()
 
-
-// await loaders.init({expressApp: app});
+app.use('/api', loaders)
 
 
 app.listen(config.port, err => {
