@@ -16,7 +16,7 @@ router.get('/singup', async (req, res) => {
 }
 );
 router.post('/singup/', (req, res) => {
-    console.log(req)
+    console.log(req.body)
     // const response = await authService.signUp(req.body.email,req.body.password);
 
     // res.json(response)
