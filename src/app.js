@@ -8,8 +8,11 @@ async function startServer(){
 
 
 const app = express()
+//Para enviar na requisição um body, são necessárias as duas instâncias seguintes:
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use('/api', loaders)
 
 

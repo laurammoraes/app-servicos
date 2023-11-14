@@ -1,15 +1,18 @@
+
 const AWS = require('aws-sdk');
 const jwt_decode = require('jwt-decode');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const credentials = require('./aws_credentials');
 let cognitoAttributeList = [];
 
 //Arquivo de criação e conexão com o serviço do cognito da AWS
 //Credenciais para conexão:
 
 const poolData = {
-    UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
-    ClienteId: process.env.AWS_COGNITO_CLIENT_ID
+    UserPoolId: credentials.user_pool_id,
+    ClienteId: credentials.client_id
 }
+
 
 //Estabelecimento dos atributos do cadastro do novo usuário a ser cadastrado na plataforma
 
@@ -41,6 +44,7 @@ function getCognitoAttributeList() {
   }
   
   function getUserPool(){
+    console.log(poolData)
     return new AmazonCognitoIdentity.CognitoUserPool(poolData);
   }
   
@@ -52,7 +56,7 @@ function getCognitoAttributeList() {
     return new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
   }
   
-  function initAWS (region = process.env.AWS_COGNITO_REGION, identityPoolId = process.env.AWS_COGNITO_IDENTITY_POOL_ID) {
+  function initAWS (region = credentials.region, identityPoolId = credentials.identity_pool) {
     AWS.config.region = region;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: identityPoolId,

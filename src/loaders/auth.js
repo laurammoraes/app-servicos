@@ -9,14 +9,14 @@ const authService = require('../services/auth');
 const router = express.Router();
 
 router.get('/singup', async (req, res) => {
-    
-    // const response = await authService.signUp(req.body.email,req.body.password);
+    console.log(req.body.email,req.body.password)
+    const response = await authService.signUp(req.body.email,req.body.password);
 
-    // res.json(response)
+    res.json(response)
 }
 );
 router.post('/singup/', (req, res) => {
-    console.log(req.body)
+    
     // const response = await authService.signUp(req.body.email,req.body.password);
 
     // res.json(response)

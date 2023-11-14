@@ -1,12 +1,13 @@
 const AwsConfig = require('../config/aws');
 
 function signUp(email, password, agent = 'none') {
-  console.log(email)
     return new Promise((resolve) => {
+      
       AwsConfig.initAWS();
       AwsConfig.setCognitoAttributeList(email,agent);
-      AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
+      AwsConfig.getUserPool(function(err, result){
         if (err) {
+          console.log('err')
           return resolve({ statusCode: 422, response: err });
         }
         const response = {
@@ -16,6 +17,18 @@ function signUp(email, password, agent = 'none') {
         }
           return resolve({ statusCode: 201, response: response });
         });
+      // AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
+      //   if (err) {
+      //     console.log('err')
+      //     return resolve({ statusCode: 422, response: err });
+      //   }
+      //   const response = {
+      //     username: result.user.username,
+      //     userConfirmed: result.userConfirmed,
+      //     userAgent: result.user.client.userAgent,
+      //   }
+      //     return resolve({ statusCode: 201, response: response });
+      //   });
       });
   }
   
