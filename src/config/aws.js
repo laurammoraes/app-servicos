@@ -24,6 +24,7 @@ const attributes = (key, value) => {
 };
 
 function setCognitoAttributeList(email, agent) {
+  console.log(email)
     let attributeList = [];
     attributeList.push(attributes('email',email));
     attributeList.forEach(element => {
@@ -57,10 +58,12 @@ function getCognitoAttributeList() {
   }
   
   function initAWS (region = credentials.region, identityPoolId = credentials.identity_pool) {
+    console.log('init', region, identityPoolId)
     AWS.config.region = region;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
       IdentityPoolId: identityPoolId,
     });
+    
   }
   
   function decodeJWTToken(token) {

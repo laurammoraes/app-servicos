@@ -13,6 +13,8 @@ if (envFound.error) {
 }
 
 module.exports = {
+  access_key: process.env.AWS_ACCESS_KEY_ID,
+  secret_key: process.env.AWS_SECRET_ACCESS_ID,
   user_pool_id: process.env.AWS_COGNITO_USER_POOL_ID,
   client_id: process.env.AWS_COGNITO_CLIENT_ID, 
   region: process.env.AWS_COGNITO_REGION,
