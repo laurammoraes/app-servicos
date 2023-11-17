@@ -1,15 +1,18 @@
 const AwsConfig = require('../config/aws');
 
-function signUp(email, password, agent = 'none') {
+function signUp(email, password,phone_number, agent = 'none') {
+  console.log(phone_number)
     return new Promise((resolve) => {
       
       AwsConfig.initAWS();
-      AwsConfig.setCognitoAttributeList(email,agent);
+      AwsConfig.setCognitoAttributeList(email,phone_number,agent);
       AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
         if (err) {
-          console.log(err)
-          return resolve({ statusCode: 422, response: err });
+          console.log(err.message || JSON.stringify(err))
+          
+          return resolve({ statusCode: 422, response: err.message });
         }
+        
         const response = {
           username: result.user.username,
           userConfirmed: result.userConfirmed,

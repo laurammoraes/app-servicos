@@ -2,12 +2,14 @@ const AWS = require('aws-sdk');
 const jwt_decode = require('jwt-decode');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const credentials = require('./aws_credentials');
+
 let cognitoAttributeList = [];
 
 
 var poolData = {
   UserPoolId: credentials.user_pool_id, 
-  ClientId: credentials.client_id
+  ClientId: credentials.client_id,
+  SecretKey: credentials.secret_key
 }
 
 
@@ -18,16 +20,19 @@ const attributes = (key, value) => {
     }
 };
 
-function setCognitoAttributeList(email, agent) {
+function setCognitoAttributeList(email,phone_number, agent) {
  
     let attributeList = [];
     attributeList.push(attributes('email',email));
+    attributeList.push(attributes('phone_number',phone_number));
+    console.log(attributeList)
     attributeList.forEach(element => {
       cognitoAttributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
     });
 }
 
 function getCognitoAttributeList() {
+    
     return cognitoAttributeList;
   }
   

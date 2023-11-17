@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/singup', async (req, res) => {
     
-    const response = await authService.signUp(req.body.email,req.body.password);
+    const response = await authService.signUp(req.body.email,req.body.password, req.body.phone_number);
 
     res.json(response)
 }
