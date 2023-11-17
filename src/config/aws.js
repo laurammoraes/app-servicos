@@ -6,8 +6,8 @@ let cognitoAttributeList = [];
 
 
 var poolData = {
-  UserPoolId: 'us-east-1_SC87tvKD5', 
-  ClientId: '20m548cljlhu9fm9md1k1a0hbn'
+  UserPoolId: credentials.user_pool_id, 
+  ClientId: credentials.client_id
 }
 
 
