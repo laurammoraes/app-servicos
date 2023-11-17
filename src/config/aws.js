@@ -10,14 +10,6 @@ var poolData = {
   ClientId: '20m548cljlhu9fm9md1k1a0hbn'
 }
 
-// const poolData = {
-//   UserPoolId: credentials.user_pool_id,
-//   ClienteId: credentials.client_id
-// }
-
-
-
-
 
 const attributes = (key, value) => { 
     return {
@@ -48,14 +40,14 @@ function getCognitoAttributeList() {
   }
   
   function getUserPool() {
-    console.log(poolData);
+    
 
     try {
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-        console.log("User Pool created successfully:", userPool);
+        
         return userPool;
     } catch (error) {
-        console.error("Error creating User Pool:", error);
+       
         throw error; // throw the error to handle it appropriately in the calling code
     }
 }
