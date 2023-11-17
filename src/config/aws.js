@@ -6,8 +6,8 @@ let cognitoAttributeList = [];
 
 
 var poolData = {
-    userPoolId: 'us-east-1_SC87tvKD5', 
-    userPoolWebClientId: '20m548cljlhu9fm9md1k1a0hbn'
+  UserPoolId: 'us-east-1_SC87tvKD5', 
+  ClientId: '20m548cljlhu9fm9md1k1a0hbn'
 }
 
 // const poolData = {
