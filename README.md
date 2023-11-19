@@ -50,16 +50,13 @@ $ git clone https://github.com/laurammoraes/app-servicos.git
 #### Acesse a pasta do projeto no terminal/cmd
 $ cd api
 
-#### Vá para a pasta server
-$ cd src
-
 #### Instale as dependências
 $ npm install
 
 #### Execute a aplicação em modo de desenvolvimento
 $ nodemon app.js
 
-#### O servidor inciará na porta:3000 - acesse <http://localhost:3000> 
+#### O servidor inciará na porta:3000 - acesse <http://localhost:3000/doc> 
 
 
 ### 🛠 Tecnologias
