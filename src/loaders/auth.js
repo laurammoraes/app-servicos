@@ -8,7 +8,17 @@ const authService = require('../services/auth');
 
 const router = express.Router();
 
-router.get('/singup', async (req, res) => {
+router.post('/singup', async (req, res) => {
+
+     /* #swagger.tags = ['User']
+           #swagger.description = 'Endpoint para adicionar um usuário.' */
+
+     /* #swagger.parameters['Cadastro'] = {
+	       in: 'body',
+               description: 'Forneça seus dados para cadastro',
+               type: 'string',
+               schema: { $ref: "#/definitions/AddUser" }
+        } */
     
     const response = await authService.signUp(req.body.email,req.body.password, req.body.phone_number);
 
