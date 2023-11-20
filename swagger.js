@@ -26,6 +26,10 @@ const doc = {
             $email: "laura@gideonsolutions.com.br",
             $password: 'Teste-123',
             $phone_number: "+5519993417478"
+        },
+        VerifyUser: {
+            $email: "laura@gideonsolutions.com.br",
+            $code:"XXXX"
         }
     }
     

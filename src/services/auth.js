@@ -1,7 +1,7 @@
 const AwsConfig = require('../config/aws');
 
 function signUp(email, password,phone_number, agent = 'none') {
-  console.log(phone_number)
+  
     return new Promise((resolve) => {
       
       AwsConfig.initAWS();
@@ -29,7 +29,7 @@ function signUp(email, password,phone_number, agent = 'none') {
         if (err) {
           return resolve({ statusCode: 422, response: err });
         }
-        return resolve({ statusCode: 400, response: result });
+        return resolve({ statusCode: 200, response: result });
       });
     });
   }

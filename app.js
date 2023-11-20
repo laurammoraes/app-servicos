@@ -18,7 +18,7 @@ app.use(express.json());
 app.use('/', loaders)
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-console.log(config.port)
+
 app.listen(config.port, err => {
   if(err){
     console.log(err);

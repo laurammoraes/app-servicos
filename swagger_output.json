@@ -47,16 +47,6 @@
         }
       }
     },
-    "/singup/": {
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/singin": {
       "get": {
         "description": "",
@@ -68,8 +58,21 @@
       }
     },
     "/verify": {
-      "get": {
-        "description": "",
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint para verificar o email do usuário e ativar o cadastro no Cognito.",
+        "parameters": [
+          {
+            "name": "Verificação",
+            "in": "body",
+            "description": "Forneça o email cadastrado e o código de verificação",
+            "schema": {
+              "$ref": "#/definitions/VerifyUser"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -99,6 +102,23 @@
         "email",
         "password",
         "phone_number"
+      ]
+    },
+    "VerifyUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "laura@gideonsolutions.com.br"
+        },
+        "code": {
+          "type": "string",
+          "example": "XXXX"
+        }
+      },
+      "required": [
+        "email",
+        "code"
       ]
     }
   }
