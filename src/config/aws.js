@@ -77,6 +77,9 @@ function getCognitoAttributeList() {
   }
   
   function decodeJWTToken(token) {
+
+    const teste = jwt_decode(token.idToken)
+    console.log(teste + "aqui")
     const {  email, exp, auth_time , token_use, sub} = jwt_decode(token.idToken);
     return {  token, email, exp, uid: sub, auth_time, token_use };
   }
