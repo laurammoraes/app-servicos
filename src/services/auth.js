@@ -23,9 +23,12 @@ function signUp(email, password,phone_number, agent = 'none') {
         
         return resolve({ statusCode: 201, response: response });
         });
-        
-      dynamo.initDynamo()
-      dynamo.createUser(email, phone_number)
+    
+      
+      dynamo.initDynamo();
+      dynamo.createUser(email, phone_number);
+      
+      
        
        
       });

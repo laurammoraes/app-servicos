@@ -25,7 +25,7 @@ function setCognitoAttributeList(email,phone_number, agent) {
     let attributeList = [];
     attributeList.push(attributes('email',email));
     attributeList.push(attributes('phone_number',phone_number));
-    console.log(attributeList)
+    
     attributeList.forEach(element => {
       cognitoAttributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
     });
