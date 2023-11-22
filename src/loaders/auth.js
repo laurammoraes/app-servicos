@@ -19,8 +19,11 @@ router.post('/singup', async (req, res) => {
                type: 'string',
                schema: { $ref: "#/definitions/AddUser" }
         } */
-    
-    const response = await authService.signUp(req.body.email,req.body.password, req.body.phone_number);
+
+    var email = req.body.email 
+    var password = req.body.password
+    var phone_number = req.body.phone_number
+    const response = await authService.signUp(email,password,phone_number );
 
     res.json(response)
 }
@@ -37,8 +40,10 @@ router.post('/singin', async (req, res) => {
                type: 'string',
                schema: { $ref: "#/definitions/LoginUser" }
         } */
+    var email = req.body.email 
+    var password = req.body.password
     
-    const response = await authService.signIn(req.body.email,req.body.password);
+    const response = await authService.signIn(email,password);
     res.json(response)
 }
 );
@@ -53,8 +58,9 @@ router.post('/verify', async (req, res) => {
                type: 'string',
                schema: { $ref: "#/definitions/VerifyUser" }
         } */
-    
-    const response = await authService.verify(req.body.email,req.body.codeEmailVerify);
+    var email = req.body.email 
+    var codeEmailVerify = req.body.codeEmailVerify
+    const response = await authService.verify(email,codeEmailVerify);
     res.json(response)
 });
 

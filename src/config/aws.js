@@ -1,9 +1,5 @@
 const AWS = require('aws-sdk');
 const jwt_decode = require('jwt-decode');
-const jwkToPem = require('jwk-to-pem');
-const jwt = require('jsonwebtoken');
-const path = require('path');
-const fs = require('fs');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const credentials = require('./aws_credentials');
 

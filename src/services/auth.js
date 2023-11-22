@@ -1,4 +1,6 @@
+const { Aws } = require('aws-cdk-lib');
 const AwsConfig = require('../config/aws');
+const dynamo = require('../config/aws_dynamodb')
 
 function signUp(email, password,phone_number, agent = 'none') {
   
@@ -18,8 +20,14 @@ function signUp(email, password,phone_number, agent = 'none') {
           userConfirmed: result.userConfirmed,
           userAgent: result.user.client.userAgent,
         }
-          return resolve({ statusCode: 201, response: response });
+        
+        return resolve({ statusCode: 201, response: response });
         });
+        
+      dynamo.initDynamo()
+      dynamo.createUser(email, phone_number)
+       
+       
       });
   }
   
