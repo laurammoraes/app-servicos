@@ -30,6 +30,10 @@ const doc = {
         VerifyUser: {
             $email: "laura@gideonsolutions.com.br",
             $code:"XXXX"
+        },
+        LoginUser: {
+            $email: "laurammoraes2@gmail.com",
+            $password:"Ritinha-09"
         }
     }
     

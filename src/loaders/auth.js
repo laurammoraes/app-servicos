@@ -26,7 +26,17 @@ router.post('/singup', async (req, res) => {
 }
 );
 
-router.post('/singin', async (req, res, next) => {
+router.post('/singin', async (req, res) => {
+
+    /* #swagger.tags = ['User']
+           #swagger.description = 'Endpoint de login do usuário' */
+
+     /* #swagger.parameters['Login'] = {
+	       in: 'body',
+               description: 'Forneça o email cadastrado e a senha',
+               type: 'string',
+               schema: { $ref: "#/definitions/LoginUser" }
+        } */
     
     const response = await authService.signIn(req.body.email,req.body.password);
     res.json(response)

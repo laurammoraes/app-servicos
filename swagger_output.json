@@ -48,8 +48,21 @@
       }
     },
     "/singin": {
-      "get": {
-        "description": "",
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint de login do usuário",
+        "parameters": [
+          {
+            "name": "Login",
+            "in": "body",
+            "description": "Forneça o email cadastrado e a senha",
+            "schema": {
+              "$ref": "#/definitions/LoginUser"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -119,6 +132,23 @@
       "required": [
         "email",
         "code"
+      ]
+    },
+    "LoginUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "laurammoraes2@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "Ritinha-09"
+        }
+      },
+      "required": [
+        "email",
+        "password"
       ]
     }
   }
