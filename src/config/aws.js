@@ -1,5 +1,9 @@
 const AWS = require('aws-sdk');
 const jwt_decode = require('jwt-decode');
+const jwkToPem = require('jwk-to-pem');
+const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const credentials = require('./aws_credentials');
 
@@ -77,13 +81,12 @@ function getCognitoAttributeList() {
   }
   
   function decodeJWTToken(token) {
-    
-    
-    var id = JSON.parse(atob(token.idToken.split('.')[1]))
 
-    var {  email, exp, auth_time , token_use, sub} = jwt_decode(id);
+    var {  email, exp, auth_time , token_use, sub} = jwt_decode(token.idToken);
+    
     return {  token, email, exp, uid: sub, auth_time, token_use };
   }
+
   
   module.exports = {
     initAWS,

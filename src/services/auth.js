@@ -47,8 +47,6 @@ function signUp(email, password,phone_number, agent = 'none') {
           }  
           return resolve({ statusCode: 200, response: AwsConfig.decodeJWTToken(token) });
       },
-         
-      
         
         onFailure: (err) => {
           return resolve({ statusCode: 400, response: err.message || JSON.stringify(err)});
