@@ -66,7 +66,7 @@ function getCognitoAttributeList() {
     return new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
   }
   
-  function initAWS (region = credentials.region, identityPoolId = credentials.identity_pool) {
+  function initAWS(region = credentials.region, identityPoolId = credentials.identity_pool) {
    
     AWS.config.region = region;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({

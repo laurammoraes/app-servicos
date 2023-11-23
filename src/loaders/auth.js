@@ -64,5 +64,12 @@ router.post('/verify', async (req, res) => {
     res.json(response)
 });
 
+router.post('/forgot-password', async (req, res) => {
+    const email = req.body.email; 
+
+    const response = await authService.forgotPassword(email); 
+    res.json(response)
+})
+
 module.exports = router;
 

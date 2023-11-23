@@ -65,9 +65,29 @@ function signUp(email, password,phone_number, agent = 'none') {
       });
     });
   }
+
+  function forgotPassword(email) {
+    return new Promise((resolve) => {
+
+        AwsConfig.initAWS();
+        const user = AwsConfig.getCognitoUser(email)
+
+        user.forgotPassword({
+          onSuccess: function(result){
+           
+            return resolve({ statusCode: 200, response: "Código enviado ao email cadastrado" });
+          },
+          onFailure: function(err){
+            return resolve({ statusCode: 400, response: err.message || JSON.stringify(err)});
+          }
+        })
+    })
+
+  }
   
   module.exports = {
       signUp,
       verify,
-      signIn
+      signIn, 
+      forgotPassword
   }

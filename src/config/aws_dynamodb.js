@@ -16,27 +16,8 @@ function initDynamo(accessKeyId = credentials.access_key, secretAccessKey = cred
 
 function createUser(email, phone_number){
 
-    //Trativa para não cadastrar dois usuários iguais no banco de dados.
-
         var table = "serviceasy";
         var doc = new aws.DynamoDB.DocumentClient();
-
-        var valuesGet = {
-            TableName: table,
-        };
-        let items;
-        items = doc.scan(valuesGet, function(err, data) {
-            if (err) {
-                console.error("Erro: ", JSON.stringify(err, null, 2));
-            } else {
-                console.log("Item encontrado! ", JSON.stringify(data, null, 2));
-            }
-        }).promise();
-        console.log(items)
-
-      
-
-
         var values = {
             TableName: table, 
             Item:{
@@ -50,16 +31,10 @@ function createUser(email, phone_number){
             if (err) {
                 console.error("Erro: ", JSON.stringify(err, null, 2));
             } else {
-                console.log("Item adicionado! ");
+                console.log('Item cadastrado!')
             }
-        });
-
-        
-    
-   
-    
-
-}
+        }); 
+    }
 
 module.exports = {
     initDynamo,
