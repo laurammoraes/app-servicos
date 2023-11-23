@@ -34,6 +34,14 @@ const doc = {
         LoginUser: {
             $email: "laurammoraes2@gmail.com",
             $password:"Ritinha-09"
+        },
+        ForgotPassword:{
+            $email:"laurammoraes2@gmail.com",
+        },
+        UpdatePassword:{
+            $email:"laurammoraes2@gmail.com", 
+            $code:"733404", 
+            $newPassword:"Laura-123"
         }
     }
     

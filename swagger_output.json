@@ -92,6 +92,52 @@
           }
         }
       }
+    },
+    "/forgot-password": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint para solicitar o código para recuperação da senha",
+        "parameters": [
+          {
+            "name": "Verificação",
+            "in": "body",
+            "description": "Forneça o email cadastrado",
+            "schema": {
+              "$ref": "#/definitions/ForgotPassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/update-password": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Endpoint para vericação do código enviado no email e cadastro da nova senha",
+        "parameters": [
+          {
+            "name": "Verificação",
+            "in": "body",
+            "description": "Forneça o email cadastrado, código de verificação e a nova senha",
+            "schema": {
+              "$ref": "#/definitions/UpdatePassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -149,6 +195,40 @@
       "required": [
         "email",
         "password"
+      ]
+    },
+    "ForgotPassword": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "laurammoraes2@gmail.com"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "UpdatePassword": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "laurammoraes2@gmail.com"
+        },
+        "code": {
+          "type": "string",
+          "example": "733404"
+        },
+        "newPassword": {
+          "type": "string",
+          "example": "Laura-123"
+        }
+      },
+      "required": [
+        "email",
+        "code",
+        "newPassword"
       ]
     }
   }

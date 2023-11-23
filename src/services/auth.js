@@ -10,8 +10,6 @@ function signUp(email, password,phone_number, agent = 'none') {
       AwsConfig.setCognitoAttributeList(email,phone_number,agent);
       AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
         if (err) {
-          console.log(err.message || JSON.stringify(err))
-          
           return resolve({ statusCode: 422, response: err.message });
         }
         
@@ -74,7 +72,7 @@ function signUp(email, password,phone_number, agent = 'none') {
 
         user.forgotPassword({
           onSuccess: function(result){
-           console.log(JSON.stringify(result))
+           
             return resolve({ statusCode: 200, response: "Código enviado ao email cadastrado" });
           },
           onFailure: function(err){
@@ -89,15 +87,14 @@ function signUp(email, password,phone_number, agent = 'none') {
     return new Promise((resolve) => {
       AwsConfig.initAWS();
       const user = AwsConfig.getCognitoUser(email)
-      // console.log(user)
       user.confirmPassword(code, newPassword, {
         onSuccess: function(result){
-          console.log(JSON.stringify(result))
+        
           return resolve({ statusCode: 200, response: "Senha alterada com sucesso" });
 
         }, 
         onFailure: function(err){
-          console.log(JSON.stringify(err))
+          
           return resolve({ statusCode: 400, response: err.message || JSON.stringify(err)});
           
         }

@@ -65,6 +65,16 @@ router.post('/verify', async (req, res) => {
 });
 
 router.post('/forgot-password', async (req, res) => {
+    /* #swagger.tags = ['User']
+        #swagger.description = 'Endpoint para solicitar o código para recuperação da senha' */
+
+    /* #swagger.parameters['Verificação'] = {
+        in: 'body',
+            description: 'Forneça o email cadastrado',
+            type: 'string',
+            schema: { $ref: "#/definitions/ForgotPassword" }
+    } */
+
     const email = req.body.email; 
 
     const response = await authService.forgotPassword(email); 
@@ -72,6 +82,17 @@ router.post('/forgot-password', async (req, res) => {
 })
 
 router.post('/update-password', async (req, res) => {
+
+    /* #swagger.tags = ['User']
+        #swagger.description = 'Endpoint para vericação do código enviado no email e cadastro da nova senha' */
+
+    /* #swagger.parameters['Verificação'] = {
+        in: 'body',
+            description: 'Forneça o email cadastrado, código de verificação e a nova senha',
+            type: 'string',
+            schema: { $ref: "#/definitions/UpdatePassword" }
+    } */
+
     const email = req.body.email; 
     const code = req.body.code; 
     const newPassword = req.body.newPassword; 
