@@ -71,5 +71,14 @@ router.post('/forgot-password', async (req, res) => {
     res.json(response)
 })
 
+router.post('/update-password', async (req, res) => {
+    const email = req.body.email; 
+    const code = req.body.code; 
+    const newPassword = req.body.newPassword; 
+
+    const response = await authService.updatePassword(email, code, newPassword);
+    res.json(response)
+})
+
 module.exports = router;
 
