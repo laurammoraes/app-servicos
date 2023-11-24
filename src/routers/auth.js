@@ -32,9 +32,15 @@ router.post('/singup', async (req, res) => {
 
 router.get('/list-user', async(req, res) =>{
     const response = await authService.listUser();
-
     res.json(response)
-} )
+});
+
+router.put('/update-user', async(req, res) => {
+    const newPhoneNumber = req.body.phone_number;
+    const response = await authService.updateUser(newPhoneNumber);
+    res.json(response)
+})
+
 
 router.post('/singin', async (req, res) => {
 

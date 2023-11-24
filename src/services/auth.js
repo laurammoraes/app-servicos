@@ -126,6 +126,16 @@ function signUp(email, password,phone_number, agent = 'none') {
 
     
   }
+
+  function updateUser(newPhoneNumber){
+      return new Promise(async (resolve) => {
+        const email = "laura@gideonsolutions.com.br"
+        dynamo.initDynamo()
+        const item = await dynamo.updateUser(email, newPhoneNumber); 
+        return resolve({ statusCode: 200});
+
+      })
+  }
   
   module.exports = {
       signUp,
@@ -133,5 +143,6 @@ function signUp(email, password,phone_number, agent = 'none') {
       signIn, 
       forgotPassword, 
       updatePassword,
-      listUser
+      listUser,
+      updateUser
   }

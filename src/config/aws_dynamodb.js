@@ -58,9 +58,37 @@ async function listUser(email){
    
    
 }
+async function updateUser(email, newPhoneNumber){
+    var table = "serviceasy";
+    var doc = new aws.DynamoDB.DocumentClient();
+    var values = {
+        TableName: table, 
+        Key:{
+            email: email
+        },
+        UpdateExpression:'set phone_number = :newPhoneNumber',
+        ExpressionAttributeValues: {
+            ':newPhoneNumber': newPhoneNumber,  
+        },
+       
+        
+    }
+ 
+    await doc.update(values, function(err, data){
+        if (err) {
+            console.error("Erro: ", JSON.stringify(err, null, 2));
+        } else {
+            console.log('Item alterado!')
+        }
+    }).promise();
+    
+   
+   
+}
 
 module.exports = {
     initDynamo,
     createUser,
-    listUser
+    listUser, 
+    updateUser
   }
