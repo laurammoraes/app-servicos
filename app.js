@@ -1,5 +1,5 @@
 const config = require('./src/config');
-const loaders = require('./src/loaders/auth')
+const routersAuth = require('./src/routers/auth')
 const express = require('express')
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
@@ -15,7 +15,7 @@ const app = express()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/', loaders)
+app.use('/auth', routersAuth)
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 

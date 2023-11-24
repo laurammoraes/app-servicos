@@ -30,6 +30,12 @@ router.post('/singup', async (req, res) => {
 }
 );
 
+router.get('/list-user', async(req, res) =>{
+    const response = await authService.listUser();
+
+    res.json(response)
+} )
+
 router.post('/singin', async (req, res) => {
 
     /* #swagger.tags = ['User']

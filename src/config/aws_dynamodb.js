@@ -36,7 +36,31 @@ function createUser(email, phone_number){
         }); 
     }
 
+async function listUser(email){
+    var table = "serviceasy";
+    var doc = new aws.DynamoDB.DocumentClient();
+    var values = {
+        TableName: table, 
+        Key:{
+            email: email
+        }
+        
+    }
+ 
+    const item = await doc.get(values, function(err, data){
+            
+        return JSON.stringify(data)
+        
+    }).promise();
+    
+    return item
+   
+   
+   
+}
+
 module.exports = {
     initDynamo,
-    createUser
+    createUser,
+    listUser
   }

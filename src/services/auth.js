@@ -113,6 +113,19 @@ function signUp(email, password,phone_number, agent = 'none') {
   //   })
 
   // }
+
+  function listUser(){
+    return new Promise(async (resolve) =>{
+      const email = "laura@gideonsolutions.com.br"
+      dynamo.initDynamo();
+      const item = await dynamo.listUser(email)
+      console.log(item)
+      return resolve({ statusCode: 200, response: item });
+
+    })
+
+    
+  }
   
   module.exports = {
       signUp,
@@ -120,5 +133,5 @@ function signUp(email, password,phone_number, agent = 'none') {
       signIn, 
       forgotPassword, 
       updatePassword,
-      logout
+      listUser
   }
