@@ -54,6 +54,8 @@ function signUp(email, password,phone_number, agent = 'none') {
             idToken: result.getIdToken().getJwtToken(),
             refreshToken: result.getRefreshToken().getToken(),
           }  
+        
+        
           return resolve({ statusCode: 200, response: AwsConfig.decodeJWTToken(token) });
       },
         
@@ -101,11 +103,22 @@ function signUp(email, password,phone_number, agent = 'none') {
       })
     })
   }
+
+  // function logout(token){
+  //   return new Promise((resolve) => {
+  
+  //     const email = AwsConfig.verify(token)
+      
+
+  //   })
+
+  // }
   
   module.exports = {
       signUp,
       verify,
       signIn, 
       forgotPassword, 
-      updatePassword
+      updatePassword,
+      logout
   }

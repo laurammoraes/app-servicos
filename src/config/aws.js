@@ -77,12 +77,14 @@ function getCognitoAttributeList() {
   }
   
   function decodeJWTToken(token) {
+    console.log(token.idToken)
 
     var {  email, exp, auth_time , token_use, sub} = jwt_decode(token.idToken);
     
     return {  token, email, exp, uid: sub, auth_time, token_use };
   }
 
+ 
   
   module.exports = {
     initAWS,
@@ -91,6 +93,6 @@ function getCognitoAttributeList() {
     getCognitoUser,
     setCognitoAttributeList,
     getAuthDetails,
-    decodeJWTToken,
+    decodeJWTToken
   }
 

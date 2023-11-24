@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 
 const authService = require('../services/auth');
+const { access_key } = require('../config/aws_credentials');
 
 const router = express.Router();
 
@@ -100,6 +101,14 @@ router.post('/update-password', async (req, res) => {
     const response = await authService.updatePassword(email, code, newPassword);
     res.json(response)
 })
+
+// router.get('/logout', async (req, res)=>{
+  
+//     const token = req.headers.idToken
+//     const response = await authService.logout(token)
+// })
+
+
 
 module.exports = router;
 
