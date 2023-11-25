@@ -1,7 +1,7 @@
 const swaggerAutogen = require('swagger-autogen')()
 
 const outputFile = './swagger_output.json'
-const endpointsFiles = ['./src/loaders/auth.js']
+const endpointsFiles = ['./src/routers/auth.js']
 
 const doc = {
     info: {
@@ -17,18 +17,22 @@ const doc = {
     tags: [
         {
             "name": "User",
-            "description": "Endpoints"
+            "description": "Endpoints User"
+        },
+        {
+            "name": "Auth",
+            "description": "Endpoints Auth"
         }
     ],
     definitions: {
         
-        AddUser: {
-            $email: "laura@gideonsolutions.com.br",
+        DataUser: {
+            $email: "laurammoraes2@gmail.com",
             $password: 'Teste-123',
-            $phone_number: "+5519993417478"
+            $phoneNumber: "+5519993417478"
         },
         VerifyUser: {
-            $email: "laura@gideonsolutions.com.br",
+            $email: "laurammoraes2@gmail.com",
             $code:"XXXX"
         },
         LoginUser: {
@@ -42,6 +46,9 @@ const doc = {
             $email:"laurammoraes2@gmail.com", 
             $code:"733404", 
             $newPassword:"Laura-123"
+        }, 
+        UpdateUser:{
+            $newPhoneNumber: "+5519993419999"
         }
     }
     

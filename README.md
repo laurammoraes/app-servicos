@@ -17,8 +17,8 @@ E pensando no rankeamento dos prestadores de serviços e segurança dos clientes
 
 
 ### Features - Back-end
-- [ ] Autenticação do usuário com Cognito;
-- [ ] Cadastro do cliente;
+- [X] Autenticação do usuário com Cognito;
+- [X] Cadastro do cliente;
 - [ ] Cadastro do prestador de serviço;
 - [ ] Cadastro do serviço;
 - [ ] Chat;
@@ -64,7 +64,6 @@ $ npm run swagger-autogen
 As seguintes ferramentas foram usadas na construção do projeto:
 
 - [Node.js](https://nodejs.org/en/)
-- [TypeScript](https://www.typescriptlang.org/)
 - [AWS](https://aws.amazon.com/pt/)
 
 ### Autora
@@ -72,6 +71,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 Feito com ❤️ por Laura Moraes 
 Entre em Contato!
 
-E-mail: laura@gideonsolutions.com.br
+E-mail: laurammoraes2@gmail.com
 
 

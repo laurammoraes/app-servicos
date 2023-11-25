@@ -15,7 +15,7 @@ const app = express()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/auth', routersAuth)
+app.use('/', routersAuth)
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 

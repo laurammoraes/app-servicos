@@ -2,12 +2,13 @@ const { Aws } = require('aws-cdk-lib');
 const AwsConfig = require('../config/aws');
 const dynamo = require('../config/aws_dynamodb')
 
-function signUp(email, password,phone_number, agent = 'none') {
+
+function signUp(email, password,phoneNumber, agent = 'none') {
   
     return new Promise((resolve) => {
       
       AwsConfig.initAWS();
-      AwsConfig.setCognitoAttributeList(email,phone_number,agent);
+      AwsConfig.setCognitoAttributeList(email,phoneNumber,agent);
       AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
         if (err) {
           return resolve({ statusCode: 422, response: err.message });
@@ -24,7 +25,7 @@ function signUp(email, password,phone_number, agent = 'none') {
     
       
       dynamo.initDynamo();
-      dynamo.createUser(email, phone_number);
+      dynamo.createUser(email, phoneNumber);
       
       
        
@@ -136,6 +137,21 @@ function signUp(email, password,phone_number, agent = 'none') {
 
       })
   }
+  function deleteUser (){
+      return new Promise(async(resolve) => {
+        const email = "laura@gideonsolutions.com.br"
+        AwsConfig.initAWS()
+        const user = AwsConfig.getCognitoUser(email)
+        user.deleteUser((err,data) =>{
+          if(err){
+            console.log("Erro: ", err);
+          }else{
+            console.log("Usuário deletado")
+
+          }
+        })
+      })
+  }
   
   module.exports = {
       signUp,
@@ -144,5 +160,6 @@ function signUp(email, password,phone_number, agent = 'none') {
       forgotPassword, 
       updatePassword,
       listUser,
-      updateUser
+      updateUser,
+      deleteUser
   }
