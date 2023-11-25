@@ -1,4 +1,4 @@
-const config = require('./src/config');
+const config = require('./src/config/aws_credentials');
 const routersAuth = require('./src/routers/auth')
 const express = require('express')
 const swaggerUi = require('swagger-ui-express')
@@ -24,7 +24,6 @@ app.listen(config.port, err => {
     console.log(err);
     return;
   }
-  console.log(`Example app listening on port ${config.port}`)
 })
 
 };

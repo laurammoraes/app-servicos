@@ -5,11 +5,10 @@ const credentials = require('./aws_credentials');
 
 let cognitoAttributeList = [];
 
-
 var poolData = {
-  UserPoolId: credentials.user_pool_id, 
-  ClientId: credentials.client_id,
-  SecretKey: credentials.secret_key
+  UserPoolId: credentials.userPoolId, 
+  ClientId: credentials.clientId,
+  SecretKey: credentials.secretKey
 }
 
 
@@ -45,15 +44,11 @@ function getCognitoAttributeList() {
   }
   
   function getUserPool() {
-    
-
     try {
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-        
         return userPool;
     } catch (error) {
-       
-        throw error; // throw the error to handle it appropriately in the calling code
+        throw error;
     }
 }
 
@@ -66,28 +61,18 @@ function getCognitoAttributeList() {
     return new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
   }
   
-  function initAWS(region = credentials.region, identityPoolId = credentials.identity_pool) {
-   
+  function initAWS(region = credentials.region, identityPoolId = credentials.identityPool) {
     AWS.config.region = region;
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      
       IdentityPoolId: identityPoolId,
     });
 
   }
   
   function decodeJWTToken(token) {
-    
-
-    var {  email, exp, auth_time , token_use, sub} = jwt_decode(token.idToken);
-    
+    var {  email, exp, auth_time , token_use, sub} = jwt_decode(token.idToken);  
     return {  token, email, exp, uid: sub, auth_time, token_use };
   }
-
-  function deleteUser(email){
-
-  }
-
  
   
   module.exports = {

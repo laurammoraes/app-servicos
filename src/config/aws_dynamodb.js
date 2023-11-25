@@ -2,21 +2,19 @@ var aws = require('aws-sdk');
 var dynamo = require('dynamodb');
 const credentials = require('./aws_credentials');
 
-function initDynamo(accessKeyId = credentials.access_key, secretAccessKey = credentials.secret_key, region = credentials.region){
+function initDynamo(accessKeyId = credentials.accessKey, secretAccessKey = credentials.secretKey, region = credentials.region){
     try {
         var init = dynamo.AWS.config.update({accessKeyId, secretAccessKey, region});
-
+        console.log(init)
         return init
     } catch (error) {
         throw error; 
     }
- 
-
 }
 
 function createUser(email, phone_number){
 
-        var table = "serviceasy";
+        var table = credentials.tableName;
         var doc = new aws.DynamoDB.DocumentClient();
         var values = {
             TableName: table, 
@@ -37,7 +35,7 @@ function createUser(email, phone_number){
     }
 
 async function listUser(email){
-    var table = "serviceasy";
+    var table = credentials.tableName;
     var doc = new aws.DynamoDB.DocumentClient();
     var values = {
         TableName: table, 
@@ -46,20 +44,15 @@ async function listUser(email){
         }
         
     }
- 
     const item = await doc.get(values, function(err, data){
             
         return JSON.stringify(data)
         
     }).promise();
-    
     return item
-   
-   
-   
 }
 async function updateUser(email, newPhoneNumber){
-    var table = "serviceasy";
+    var table = credentials.tableName;
     var doc = new aws.DynamoDB.DocumentClient();
     var values = {
         TableName: table, 
@@ -73,7 +66,6 @@ async function updateUser(email, newPhoneNumber){
        
         
     }
- 
     await doc.update(values, function(err, data){
         if (err) {
             console.error("Erro: ", JSON.stringify(err, null, 2));
@@ -81,9 +73,6 @@ async function updateUser(email, newPhoneNumber){
             console.log('Item alterado!')
         }
     }).promise();
-    
-   
-   
 }
 
 module.exports = {

@@ -1,48 +1,42 @@
 const { Aws } = require('aws-cdk-lib');
 const AwsConfig = require('../config/aws');
 const dynamo = require('../config/aws_dynamodb')
+ 
 
-
-function signUp(email, password,phoneNumber, agent = 'none') {
-  
+function signUp(email, password,phone_number, agent = 'none') {
     return new Promise((resolve) => {
-      
       AwsConfig.initAWS();
-      AwsConfig.setCognitoAttributeList(email,phoneNumber,agent);
+      AwsConfig.setCognitoAttributeList(email,phone_number,agent);
       AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
         if (err) {
+       
           return resolve({ statusCode: 422, response: err.message });
         }
-        
+
         const response = {
           username: result.user.username,
           userConfirmed: result.userConfirmed,
           userAgent: result.user.client.userAgent,
+          message:"Código enviado no email cadastrado. Verifique seu email!"
         }
-        
+        dynamo.initDynamo();
+        dynamo.createUser(email, phone_number);
         return resolve({ statusCode: 201, response: response });
         });
-    
-      
-      dynamo.initDynamo();
-      dynamo.createUser(email, phoneNumber);
-      
-      
-       
        
       });
   }
   
-  function verify(email, code) {
-    return new Promise((resolve) => {
-      AwsConfig.getCognitoUser(email).confirmRegistration(code, true, (err, result) => {
-        if (err) {
-          return resolve({ statusCode: 422, response: err });
-        }
-        return resolve({ statusCode: 200, response: result });
-      });
+function verify(email, code) {  
+  return new Promise((resolve) => {
+    AwsConfig.getCognitoUser(email).confirmRegistration(code, true, (err, result) => {
+      if (err) {
+        return resolve({ statusCode: 422, response: err.message });
+      }
+      return resolve({ statusCode: 200, response: result });
     });
-  }
+  });
+}
   
   function signIn(email, password) {
     return new Promise((resolve) => {
@@ -75,8 +69,7 @@ function signUp(email, password,phoneNumber, agent = 'none') {
 
         user.forgotPassword({
           onSuccess: function(result){
-           
-            return resolve({ statusCode: 200, response: "Código enviado ao email cadastrado" });
+            return resolve({ statusCode: 200, response: "Código enviado ao email cadastrado. Verifique o email!" });
           },
           onFailure: function(err){
             return resolve({ statusCode: 400, response: err.message || JSON.stringify(err)});
@@ -92,32 +85,28 @@ function signUp(email, password,phoneNumber, agent = 'none') {
       const user = AwsConfig.getCognitoUser(email)
       user.confirmPassword(code, newPassword, {
         onSuccess: function(result){
-        
           return resolve({ statusCode: 200, response: "Senha alterada com sucesso" });
-
         }, 
         onFailure: function(err){
-          
           return resolve({ statusCode: 400, response: err.message || JSON.stringify(err)});
-          
         }
       })
     })
   }
 
+  //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
+  //A autorização esta em fase de implementação.
   // function logout(token){
   //   return new Promise((resolve) => {
-  
   //     const email = AwsConfig.verify(token)
-      
-
   //   })
-
   // }
 
   function listUser(){
     return new Promise(async (resolve) =>{
-      const email = "laura@gideonsolutions.com.br"
+      //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
+      //dessa forma não será necessário passar o email para realizar get. A autorização esta em fase de implementação.
+      const email = "laurammoraes2@gmail.com"
       dynamo.initDynamo();
       const item = await dynamo.listUser(email)
       console.log(item)
@@ -130,7 +119,9 @@ function signUp(email, password,phoneNumber, agent = 'none') {
 
   function updateUser(newPhoneNumber){
       return new Promise(async (resolve) => {
-        const email = "laura@gideonsolutions.com.br"
+        //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
+        //dessa forma não será necessário passar o email para realizar update. A autorização esta em fase de implementação.
+        const email = "laurammoraes2@gmail.com"
         dynamo.initDynamo()
         const item = await dynamo.updateUser(email, newPhoneNumber); 
         return resolve({ statusCode: 200});
@@ -139,7 +130,9 @@ function signUp(email, password,phoneNumber, agent = 'none') {
   }
   function deleteUser (){
       return new Promise(async(resolve) => {
-        const email = "laura@gideonsolutions.com.br"
+        //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
+        //dessa forma não será necessário passar o email para realizar delete. A autorização esta em fase de implementação.
+        const email = "laurammoraes2@gmail.com"
         AwsConfig.initAWS()
         const user = AwsConfig.getCognitoUser(email)
         user.deleteUser((err,data) =>{

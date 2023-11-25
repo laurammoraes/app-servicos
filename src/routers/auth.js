@@ -18,8 +18,8 @@ router.post('/register', async (req, res) => {
 
     var email = req.body.email 
     var password = req.body.password
-    var phoneNumber = req.body.phoneNumber
-    const response = await authService.signUp(email,password,phoneNumber);
+    var phone_number = req.body.phone_number
+    const response = await authService.signUp(email,password,phone_number);
     res.json(response)
 }
 );
