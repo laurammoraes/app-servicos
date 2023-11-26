@@ -109,7 +109,6 @@ function verify(email, code) {
       const email = "laurammoraes2@gmail.com"
       dynamo.initDynamo();
       const item = await dynamo.listUser(email)
-      console.log(item)
       return resolve({ statusCode: 200, response: item });
 
     })
@@ -124,6 +123,7 @@ function verify(email, code) {
         const email = "laurammoraes2@gmail.com"
         dynamo.initDynamo()
         const item = await dynamo.updateUser(email, newPhoneNumber); 
+
         return resolve({ statusCode: 200});
 
       })
@@ -132,6 +132,7 @@ function verify(email, code) {
       return new Promise(async(resolve) => {
         //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
         //dessa forma não será necessário passar o email para realizar delete. A autorização esta em fase de implementação.
+        //Está pendente nesta função realizar o delete no banco de dados, será implementado.
         const email = "laurammoraes2@gmail.com"
         AwsConfig.initAWS()
         const user = AwsConfig.getCognitoUser(email)
@@ -139,7 +140,7 @@ function verify(email, code) {
           if(err){
             console.log("Erro: ", err);
           }else{
-            console.log("Usuário deletado")
+            return resolve({ statusCode: 200});
 
           }
         })
