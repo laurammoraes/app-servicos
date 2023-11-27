@@ -21,9 +21,7 @@ router.post('/register', async (req, res) => {
     var phone_number = req.body.phone_number
     const response = await authService.signUp(email,password,phone_number);
     res.json(response)
-}
-);
-
+});
 router.get('/user', async(req, res) =>{
 
      /* #swagger.tags = ['User']
@@ -32,7 +30,6 @@ router.get('/user', async(req, res) =>{
     const response = await authService.listUser();
     res.json(response)
 });
-
 router.put('/user', async(req, res) => {
 
     /* #swagger.tags = ['User']
@@ -48,8 +45,7 @@ router.put('/user', async(req, res) => {
     const newPhoneNumber = req.body.phone_number;
     const response = await authService.updateUser(newPhoneNumber);
     res.json(response)
-})
-
+});
 router.delete('/user', async(req,res)=> {
 
      /* #swagger.tags = ['User']
@@ -57,9 +53,7 @@ router.delete('/user', async(req,res)=> {
 
     const response = await authService.deleteUser(); 
     res.json(response )
-})
-
-
+});
 router.post('/login', async (req, res) => {
 
     /* #swagger.tags = ['Auth']
@@ -94,7 +88,6 @@ router.post('/verifyCode', async (req, res) => {
     const response = await authService.verify(email,codeEmailVerify);
     res.json(response)
 });
-
 router.post('/forgotPassword', async (req, res) => {
     /* #swagger.tags = ['Auth']
         #swagger.description = 'Request verification code for update password' */
@@ -109,8 +102,7 @@ router.post('/forgotPassword', async (req, res) => {
     const email = req.body.email; 
     const response = await authService.forgotPassword(email); 
     res.json(response)
-})
-
+});
 router.post('/updatePassword', async (req, res) => {
 
     /* #swagger.tags = ['Auth']
@@ -129,14 +121,6 @@ router.post('/updatePassword', async (req, res) => {
     const response = await authService.updatePassword(email, code, newPassword);
     res.json(response)
 })
-
-// router.get('/logout', async (req, res)=>{
-  
-//     const token = req.headers.idToken
-//     const response = await authService.logout(token)
-// })
-
-
 
 module.exports = router;
 

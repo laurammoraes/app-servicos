@@ -7,24 +7,20 @@ const swaggerFile = require('./swagger_output.json')
 
 async function startServer(){
 
+  const app = express()
+  
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
 
+  app.use('/', routersAuth)
+  app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-const app = express()
-//Para enviar na requisição um body, são necessárias as duas instâncias seguintes:
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.use('/', routersAuth)
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-
-
-app.listen(config.port, err => {
-  if(err){
-    console.log(err);
-    return;
-  }
-})
+  app.listen(config.port, err => {
+    if(err){
+      console.log(err);
+      return;
+    }
+  })
 
 };
 

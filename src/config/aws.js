@@ -35,53 +35,53 @@ function getCognitoAttributeList() {
     return cognitoAttributeList;
   }
   
-  function getCognitoUser(email) {
-    const userData = {
-      Username: email,
-      Pool: getUserPool()
-    };
-    return new AmazonCognitoIdentity.CognitoUser(userData);
-  }
+function getCognitoUser(email) {
+  const userData = {
+    Username: email,
+    Pool: getUserPool()
+  };
+  return new AmazonCognitoIdentity.CognitoUser(userData);
+}
   
-  function getUserPool() {
-    try {
-        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-        return userPool;
-    } catch (error) {
-        throw error;
-    }
+function getUserPool() {
+  try {
+      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+      return userPool;
+  } catch (error) {
+      throw error;
+  }
 }
 
   
-  function getAuthDetails(email, password) {
-    var authenticationData = {
-      Username: email,
-      Password: password,
-     };
-    return new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-  }
-  
-  function initAWS(region = credentials.region, identityPoolId = credentials.identityPool) {
-    AWS.config.region = region;
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: identityPoolId,
-    });
+function getAuthDetails(email, password) {
+  var authenticationData = {
+    Username: email,
+    Password: password,
+    };
+  return new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+}
 
-  }
+function initAWS(region = credentials.region, identityPoolId = credentials.identityPool) {
+  AWS.config.region = region;
+  AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: identityPoolId,
+  });
+
+}
   
-  function decodeJWTToken(token) {
-    var {  email, exp, auth_time , token_use, sub} = jwt_decode(token.idToken);  
-    return {  token, email, exp, uid: sub, auth_time, token_use };
-  }
- 
+function decodeJWTToken(token) {
+  var {  email, exp, auth_time , token_use, sub} = jwt_decode(token.idToken);  
+  return {  token, email, exp, uid: sub, auth_time, token_use };
+}
+
   
-  module.exports = {
-    initAWS,
-    getCognitoAttributeList,
-    getUserPool,
-    getCognitoUser,
-    setCognitoAttributeList,
-    getAuthDetails,
-    decodeJWTToken
-  }
+module.exports = {
+  initAWS,
+  getCognitoAttributeList,
+  getUserPool,
+  getCognitoUser,
+  setCognitoAttributeList,
+  getAuthDetails,
+  decodeJWTToken
+}
 

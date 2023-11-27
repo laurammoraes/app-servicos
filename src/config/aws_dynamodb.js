@@ -14,25 +14,25 @@ function initDynamo(accessKeyId = credentials.accessKey, secretAccessKey = crede
 
 function createUser(email, phone_number){
 
-        var table = credentials.tableName;
-        var doc = new aws.DynamoDB.DocumentClient();
-        var values = {
-            TableName: table, 
-            Item:{
-               
-                "email": email,
-                "phone_number": phone_number
-            }
+    var table = credentials.tableName;
+    var doc = new aws.DynamoDB.DocumentClient();
+    var values = {
+        TableName: table, 
+        Item:{
+            
+            "email": email,
+            "phone_number": phone_number
         }
-        
-        doc.put(values, function(err, data) {
-            if (err) {
-                console.error("Erro: ", JSON.stringify(err, null, 2));
-            } else {
-                console.log('Item cadastrado!')
-            }
-        }); 
     }
+    
+    doc.put(values, function(err, data) {
+        if (err) {
+            console.error("Erro: ", JSON.stringify(err, null, 2));
+        } else {
+            console.log('Item cadastrado!')
+        }
+    }); 
+}
 
 async function listUser(email){
     var table = credentials.tableName;
@@ -51,6 +51,7 @@ async function listUser(email){
     }).promise();
     return item
 }
+
 async function updateUser(email, newPhoneNumber){
     var table = credentials.tableName;
     var doc = new aws.DynamoDB.DocumentClient();
