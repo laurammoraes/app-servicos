@@ -50,11 +50,14 @@ $ git clone https://github.com/laurammoraes/app-servicos.git
 #### Acesse a pasta do projeto no terminal/cmd
 $ cd api
 
+#### Crie o arquivo .env com base no .env-example e preencha com os dados da sua conta na aws.
+
 #### Instale as dependências
 $ npm install
 
 #### Execute a aplicação em modo de desenvolvimento
-$ npm run swagger-autogen
+$ npm run swagger-autogen - Para visualizar com a documentação 
+$ nodemon app.js - Para rodar a aplicação localmente
 
 #### O servidor inciará na porta:3000 - acesse <http://localhost:3000/doc> 
 
