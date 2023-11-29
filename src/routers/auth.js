@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const authService = require('../services/auth');
 const router = express.Router();
+const auth = require('../middleware/auth')
 
 router.post('/register', async (req, res) => {
 
