@@ -5,6 +5,7 @@ const authService = require('../services/auth');
 const router = express.Router();
 const auth = require('../middleware/auth')
 
+
 router.post('/register', async (req, res) => {
 
      /* #swagger.tags = ['User']
@@ -23,7 +24,7 @@ router.post('/register', async (req, res) => {
     const response = await authService.signUp(email,password,phone_number);
     res.json(response)
 });
-router.get('/user', async(req, res) =>{
+router.get('/user',auth.verifyToken, async(req, res) =>{
 
      /* #swagger.tags = ['User']
         #swagger.description = 'Endpoint for view data of user.' */
