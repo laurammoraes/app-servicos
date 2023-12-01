@@ -25,7 +25,7 @@ function verifyToken(req, res, next){
         console.log('Error decoding JWT:', error)
         response.status(401).end();
     }
-    console.log(decodedJwt)
+    console.log(decodedJwt.username)
     console.log(!decodedJwt || !decodedJwt.header || !decodedJwt.header.kid)
     if(!decodedJwt || !decodedJwt.header || !decodedJwt.header.kid){
        

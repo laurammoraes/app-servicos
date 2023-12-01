@@ -97,7 +97,7 @@ function listUser(){
   return new Promise(async (resolve) =>{
     //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
     //dessa forma não será necessário passar o email para realizar get. A autorização esta em fase de implementação.
-    const email = "laurammoraes2@gmail.com"
+    const email = "2f99f3d6-5543-4518-b8f1-68302a78f6c9"
     dynamo.initDynamo();
     const item = await dynamo.listUser(email)
     return resolve({ statusCode: 200, response: item });

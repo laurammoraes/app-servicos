@@ -35,22 +35,37 @@ function createUser(email, phone_number){
 }
 
 async function listUser(email){
-    var table = credentials.tableName;
-    var doc = new aws.DynamoDB.DocumentClient();
-    var values = {
-        TableName: table, 
-        Key:{
-            email: email
-        }
-        
-    }
-    const item = await doc.get(values, function(err, data){
+    // var table = credentials.tableName;
+    // var doc = new aws.DynamoDB.DocumentClient();
+    // var values = {
+    //     TableName: table, 
+    //     Filter: 'username=' + email,
+       
+    // }
+    // const item = await doc.listUser(values, function(err, data){
             
-        return JSON.stringify(data)
+    //     return JSON.stringify(data)
         
-    }).promise();
-    return item
+    // }).promise();
+    // return item
+    const cognitoIdentityServiceProvider = new aws.CognitoIdentityServiceProvider();
+
+    const params = {
+        UserPoolId: credentials.userPoolId,
+        Username: email,
+    };
+
+    try {
+        const user = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
+        return user;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Erro ao buscar usuário');
+    }
 }
+
+   
+// }
 
 async function updateUser(email, newPhoneNumber){
     var table = credentials.tableName;

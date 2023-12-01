@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
     const response = await authService.signUp(email,password,phone_number);
     res.json(response)
 });
-router.get('/user',auth.verifyToken, async(req, res) =>{
+router.get('/user', async(req, res) =>{
 
      /* #swagger.tags = ['User']
         #swagger.description = 'Endpoint for view data of user.' */
