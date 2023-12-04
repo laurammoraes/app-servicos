@@ -107,13 +107,13 @@ function listUser(user){
   
 }
 
-function updateUser(newPhoneNumber){
+function updateUser(user, newPhoneNumber){
     return new Promise(async (resolve) => {
       //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
       //dessa forma não será necessário passar o email para realizar update. A autorização esta em fase de implementação.
-      const email = "laurammoraes2@gmail.com"
+    
       dynamo.initDynamo()
-      const item = await dynamo.updateUser(email, newPhoneNumber); 
+      const item = await dynamo.updateUser(user, newPhoneNumber); 
 
       return resolve({ statusCode: 200});
 

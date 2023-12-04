@@ -40,14 +40,16 @@ async function listUser(user){
 
     const params = {
         UserPoolId: credentials.userPoolId,
-        Username: user,
+        Key:{
+            email: user
+        }
     };
 
     try {
         const user = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
         return user;
     } catch (error) {
-        console.error(error);
+       
         throw new Error('Erro ao buscar usuário');
     }
 }
@@ -55,14 +57,12 @@ async function listUser(user){
    
 // }
 
-async function updateUser(email, newPhoneNumber){
+async function updateUser(user, newPhoneNumber){
     var table = credentials.tableName;
     var doc = new aws.DynamoDB.DocumentClient();
     var values = {
         TableName: table, 
-        Key:{
-            email: email
-        },
+        Username: user,
         UpdateExpression:'set phone_number = :newPhoneNumber',
         ExpressionAttributeValues: {
             ':newPhoneNumber': newPhoneNumber,  

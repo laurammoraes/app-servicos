@@ -28,12 +28,12 @@ router.get('/user', auth.verifyToken, async(req, res) =>{
    
      /* #swagger.tags = ['User']
         #swagger.description = 'Endpoint for view data of user.' */
-
+  
     const user = req.userId 
     const response = await authService.listUser(user);
     res.json(response)
 });
-router.put('/user', async(req, res) => {
+router.put('/user',auth.verifyToken, async(req, res) => {
 
     /* #swagger.tags = ['User']
            #swagger.description = 'Endpoint for update data for user.' */
@@ -44,9 +44,9 @@ router.put('/user', async(req, res) => {
                type: 'string',
                schema: { $ref: "#/definitions/UpdateUser" }
         } */
-
+    const user = req.userId 
     const newPhoneNumber = req.body.phone_number;
-    const response = await authService.updateUser(newPhoneNumber);
+    const response = await authService.updateUser(user, newPhoneNumber);
     res.json(response)
 });
 router.delete('/user', async(req,res)=> {
