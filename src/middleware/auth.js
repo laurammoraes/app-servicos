@@ -20,35 +20,13 @@ function verifyToken(req, res, next){
     let decodedJwt; 
     try {
         decodedJwt = jwt.decode(token); 
-        
+        req.userId = decodedJwt.username
+        next()
     } catch (error) {
         console.log('Error decoding JWT:', error)
         response.status(401).end();
     }
-    console.log(decodedJwt.username)
-    console.log(!decodedJwt || !decodedJwt.header || !decodedJwt.header.kid)
-    if(!decodedJwt || !decodedJwt.header || !decodedJwt.header.kid){
-       
-        return response.status(401).end();
-    }
-    
-    let kid = decodedJwt.header.kid;
-    console.log(kid)
-    let pem = pems[kid];
-    console.log(pem)
-
-    if (!pem) {
-      response.status(401).end()
-      return
-    }
-    jwt.verify(token, pem, function (err, payload) {
-      if (err) {
-        resp.status(401).end()
-        return
-      } else {
-        next()
-      }
-    })
+   
 
 }
 

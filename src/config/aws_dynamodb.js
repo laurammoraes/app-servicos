@@ -34,25 +34,13 @@ function createUser(email, phone_number){
     }); 
 }
 
-async function listUser(email){
-    // var table = credentials.tableName;
-    // var doc = new aws.DynamoDB.DocumentClient();
-    // var values = {
-    //     TableName: table, 
-    //     Filter: 'username=' + email,
-       
-    // }
-    // const item = await doc.listUser(values, function(err, data){
-            
-    //     return JSON.stringify(data)
-        
-    // }).promise();
-    // return item
+async function listUser(user){
+   
     const cognitoIdentityServiceProvider = new aws.CognitoIdentityServiceProvider();
 
     const params = {
         UserPoolId: credentials.userPoolId,
-        Username: email,
+        Username: user,
     };
 
     try {

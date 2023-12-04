@@ -24,12 +24,13 @@ router.post('/register', async (req, res) => {
     const response = await authService.signUp(email,password,phone_number);
     res.json(response)
 });
-router.get('/user', async(req, res) =>{
-
+router.get('/user', auth.verifyToken, async(req, res) =>{
+   
      /* #swagger.tags = ['User']
         #swagger.description = 'Endpoint for view data of user.' */
 
-    const response = await authService.listUser();
+    const user = req.userId 
+    const response = await authService.listUser(user);
     res.json(response)
 });
 router.put('/user', async(req, res) => {
