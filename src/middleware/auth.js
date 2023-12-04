@@ -16,7 +16,6 @@ async function verifyToken(req, res, next){
     try {
         decodedJwt = jwt.decode(token);
         const user = await dataUser(decodedJwt.username)
-        console.log(user)
         req.userId = user
         next()
     } catch (error) {

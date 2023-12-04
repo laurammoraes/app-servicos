@@ -36,17 +36,18 @@ function createUser(email, phone_number){
 
 async function listUser(user){
    
-    const cognitoIdentityServiceProvider = new aws.CognitoIdentityServiceProvider();
-
+    const table = 'serviceasy'
     const params = {
-        UserPoolId: credentials.userPoolId,
+        Table: table,
         Key:{
             email: user
         }
     };
+   
 
     try {
-        const user = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
+        const user = await dynamo.get(params).promise();
+        console.log(user)
         return user;
     } catch (error) {
        
