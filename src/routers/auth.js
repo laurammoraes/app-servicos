@@ -29,7 +29,7 @@ router.get('/user', auth.verifyToken, async(req, res) =>{
      /* #swagger.tags = ['User']
         #swagger.description = 'Endpoint for view data of user.' */
   
-    const user = req.userId 
+    const user = req.userId  
     const response = await authService.listUser(user);
     res.json(response)
 });

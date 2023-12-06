@@ -5,7 +5,7 @@ const credentials = require('./aws_credentials');
 function initDynamo(accessKeyId = credentials.accessKey, secretAccessKey = credentials.secretKey, region = credentials.region){
     try {
         var init = dynamo.AWS.config.update({accessKeyId, secretAccessKey, region});
-        console.log(init)
+        
         return init
     } catch (error) {
         throw error; 
@@ -36,23 +36,23 @@ function createUser(email, phone_number){
 
 async function listUser(user){
    
-    const table = 'serviceasy'
-    const params = {
-        Table: table,
+    var table = "serviceasy";
+    var doc = new aws.DynamoDB.DocumentClient();
+    var values = {
+        TableName: table, 
         Key:{
             email: user
         }
-    };
-   
 
-    try {
-        const user = await dynamo.get(params).promise();
-        console.log(user)
-        return user;
-    } catch (error) {
-       
-        throw new Error('Erro ao buscar usuário');
     }
+
+    const item = await doc.get(values, function(err, data){
+
+        return JSON.stringify(data)
+
+    }).promise();
+
+    return item
 }
 
    

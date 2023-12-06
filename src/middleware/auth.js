@@ -7,7 +7,7 @@ var aws = require('aws-sdk');
 
 async function verifyToken(req, res, next){ 
     const token =req.headers.accesstoken
-   
+    
     if(!token){
         response.status(401).end;
     } 
@@ -16,6 +16,7 @@ async function verifyToken(req, res, next){
     try {
         decodedJwt = jwt.decode(token);
         const user = await dataUser(decodedJwt.username)
+        
         req.userId = user
         next()
     } catch (error) {
@@ -34,14 +35,17 @@ async function dataUser(decodedJwt){
         UserPoolId: credentials.userPoolId,
         Username:decodedJwt,
     };
+    
 
     try {
         const user = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
+        
         const response = user.UserAttributes[4].Value
+        
         return response;
     } catch (error) {
        
-        throw new Error('Erro ao buscar usuário');
+        throw new Error(error);
     }
 }
 
