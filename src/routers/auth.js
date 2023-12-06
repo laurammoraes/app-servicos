@@ -49,12 +49,13 @@ router.put('/user',auth.verifyToken, async(req, res) => {
     const response = await authService.updateUser(user, newPhoneNumber);
     res.json(response)
 });
-router.delete('/user', async(req,res)=> {
+router.delete('/user', auth.verifyToken, async(req,res)=> {
 
      /* #swagger.tags = ['User']
         #swagger.description = 'Endpoint for delete user.' */
-
-    const response = await authService.deleteUser(); 
+    const user = req.userId 
+    
+    const response = await authService.deleteUser(user); 
     res.json(response )
 });
 router.post('/login', async (req, res) => {

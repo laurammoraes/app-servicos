@@ -16,8 +16,8 @@ async function verifyToken(req, res, next){
     try {
         decodedJwt = jwt.decode(token);
         const user = await dataUser(decodedJwt.username)
-        
         req.userId = user
+        
         next()
     } catch (error) {
         console.log('Error decoding JWT:', error)
@@ -39,8 +39,12 @@ async function dataUser(decodedJwt){
 
     try {
         const user = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
-        
-        const response = user.UserAttributes[4].Value
+       
+        const response = {
+            email: user.UserAttributes[4].Value,
+            username: user.Username
+        } 
+       
         
         return response;
     } catch (error) {

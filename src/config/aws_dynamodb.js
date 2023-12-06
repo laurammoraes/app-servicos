@@ -41,7 +41,7 @@ async function listUser(user){
     var values = {
         TableName: table, 
         Key:{
-            email: user
+            email: user.email
         }
 
     }
@@ -55,15 +55,16 @@ async function listUser(user){
     return item
 }
 
-   
-// }
+ 
 
 async function updateUser(user, newPhoneNumber){
     var table = credentials.tableName;
     var doc = new aws.DynamoDB.DocumentClient();
     var values = {
         TableName: table, 
-        Username: user,
+        Key:{
+            email: user.email
+        },
         UpdateExpression:'set phone_number = :newPhoneNumber',
         ExpressionAttributeValues: {
             ':newPhoneNumber': newPhoneNumber,  

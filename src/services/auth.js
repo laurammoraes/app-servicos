@@ -1,5 +1,8 @@
+const { config } = require('dotenv');
+const AWS = require('aws-sdk')
 const AwsConfig = require('../config/aws');
 const dynamo = require('../config/aws_dynamodb')
+const credentials = require('../config/aws_credentials')
  
 
 function signUp(email, password,phone_number, agent = 'none') {
@@ -95,8 +98,6 @@ function updatePassword(email, code, newPassword){
 
 function listUser(user){
   return new Promise(async (resolve) =>{
-    //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
-    //dessa forma não será necessário passar o email para realizar get. A autorização esta em fase de implementação.
     
     dynamo.initDynamo();
     const item = await dynamo.listUser(user)
@@ -109,33 +110,28 @@ function listUser(user){
 
 function updateUser(user, newPhoneNumber){
     return new Promise(async (resolve) => {
-      //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
-      //dessa forma não será necessário passar o email para realizar update. A autorização esta em fase de implementação.
-    
+      
       dynamo.initDynamo()
-      const item = await dynamo.updateUser(user, newPhoneNumber); 
+      await dynamo.updateUser(user, newPhoneNumber); 
 
       return resolve({ statusCode: 200});
 
     })
 }
 
-function deleteUser (){
+function deleteUser (user){
   return new Promise(async(resolve) => {
-    //Nessa função é necessário que realize a implementação de autorização de usuário pelo access token
-    //dessa forma não será necessário passar o email para realizar delete. A autorização esta em fase de implementação.
-    //Está pendente nesta função realizar o delete no banco de dados, será implementado.
-    const email = "laurammoraes2@gmail.com"
-    AwsConfig.initAWS()
-    const user = AwsConfig.getCognitoUser(email)
-    user.deleteUser((err,data) =>{
-      if(err){
-        console.log("Erro: ", err);
-      }else{
-        return resolve({ statusCode: 200});
-
-      }
-    })
+    const cognito = new AWS.CognitoIdentityServiceProvider();
+    const params = {
+      UserPoolId: credentials.userPoolId,
+      Username: user.username
+    }; 
+    try {
+      await cognito.adminDeleteUser(params).promise(); 
+    } catch (error) {
+      console.log(error)
+    }
+    
   })
 }
   
