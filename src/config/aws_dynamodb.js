@@ -55,6 +55,27 @@ async function listUser(user){
     return item
 }
 
+async function deleteUser(user){
+   
+    var table = "serviceasy";
+    var doc = new aws.DynamoDB.DocumentClient();
+    var values = {
+        TableName: table, 
+        Key:{
+            email: user.email
+        }
+
+    }
+
+    const item = await doc.delete(values, function(err, data){
+
+        return "Usuário excluído com sucesso"
+
+    }).promise();
+
+    return item
+}
+
  
 
 async function updateUser(user, newPhoneNumber){
@@ -85,5 +106,6 @@ module.exports = {
     initDynamo,
     createUser,
     listUser, 
-    updateUser
+    updateUser, 
+    deleteUser
   }

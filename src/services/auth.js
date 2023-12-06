@@ -128,6 +128,15 @@ function deleteUser (user){
     }; 
     try {
       await cognito.adminDeleteUser(params).promise(); 
+      dynamo.initDynamo();
+      try {
+        const item = await dynamo.deleteUser(user)
+        return resolve({ statusCode: 200});
+      } catch (error) {
+        console.log(errror)
+      }
+      
+
     } catch (error) {
       console.log(error)
     }
