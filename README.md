@@ -18,8 +18,8 @@ E pensando no rankeamento dos prestadores de serviços e segurança dos clientes
 
 ### Features - Back-end
 - [X] Autenticação do usuário com Cognito;
-- [ ] Cadastro do cliente;
-- [ ] Cadastro do prestador de serviço;
+- [X] Cadastro do cliente;
+- [X] Cadastro do prestador de serviço;
 - [ ] Cadastro do serviço;
 - [ ] Chat;
 - [ ] Avaliações;

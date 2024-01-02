@@ -11,25 +11,31 @@ const axios = require('axios');
 
 function signUp(email, password,phone_number, type, agent = 'none') {
     return new Promise((resolve) => {
-      AwsConfig.initAWS();
-      AwsConfig.setCognitoAttributeList(email,phone_number,agent);
-      AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
-        if (err) {
-       
-          return resolve({ statusCode: 422, response: err.message });
-        }
+      if(type == "Cliente" ||type == "Prestador de serviço" ||type == "Cliente prestador"){
+        AwsConfig.initAWS();
+        AwsConfig.setCognitoAttributeList(email,phone_number,agent);
+        AwsConfig.getUserPool().signUp(email, password, AwsConfig.getCognitoAttributeList(), null, function(err, result){
+          if (err) {
+         
+            return resolve({ statusCode: 422, response: err.message });
+          }
+  
+          const response = {
+            username: result.user.username,
+            userConfirmed: result.userConfirmed,
+            userAgent: result.user.client.userAgent,
+            message:"Código enviado no email cadastrado. Verifique seu email!"
+          }
+          dynamo.initDynamo();
+          dynamo.createUser(email, phone_number, type);
+          return resolve({ statusCode: 201, response: response });
+          });
+         
+      }else{
+        return resolve({ statusCode: 500, response: "Tipo de usuário incorreto" });
+      }
 
-        const response = {
-          username: result.user.username,
-          userConfirmed: result.userConfirmed,
-          userAgent: result.user.client.userAgent,
-          message:"Código enviado no email cadastrado. Verifique seu email!"
-        }
-        dynamo.initDynamo();
-        dynamo.createUser(email, phone_number, type);
-        return resolve({ statusCode: 201, response: response });
-        });
-       
+      
       });
 }
   
