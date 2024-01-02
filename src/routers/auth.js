@@ -21,7 +21,8 @@ router.post('/user', async (req, res) => {
     var email = req.body.email 
     var password = req.body.password
     var phone_number = req.body.phone_number
-    const response = await authService.signUp(email,password,phone_number);
+    var type = req.body.type
+    const response = await authService.signUp(email,password,phone_number,type);
     res.json(response)
 });
 router.get('/user', auth.verifyToken, async(req, res) =>{

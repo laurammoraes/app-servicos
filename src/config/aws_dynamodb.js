@@ -12,7 +12,7 @@ function initDynamo(accessKeyId = credentials.accessKey, secretAccessKey = crede
     }
 }
 
-function createUser(email, phone_number){
+function createUser(email, phone_number, type){
 
     var table = credentials.tableName;
     var doc = new aws.DynamoDB.DocumentClient();
@@ -21,7 +21,8 @@ function createUser(email, phone_number){
         Item:{
             
             "email": email,
-            "phone_number": phone_number
+            "phone_number": phone_number,
+            "type": type
         }
     }
     

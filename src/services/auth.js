@@ -9,7 +9,7 @@ const localStorage = new LocalStorage('./scratch');
 const axios = require('axios');
  
 
-function signUp(email, password,phone_number, agent = 'none') {
+function signUp(email, password,phone_number, type, agent = 'none') {
     return new Promise((resolve) => {
       AwsConfig.initAWS();
       AwsConfig.setCognitoAttributeList(email,phone_number,agent);
@@ -26,7 +26,7 @@ function signUp(email, password,phone_number, agent = 'none') {
           message:"Código enviado no email cadastrado. Verifique seu email!"
         }
         dynamo.initDynamo();
-        dynamo.createUser(email, phone_number);
+        dynamo.createUser(email, phone_number, type);
         return resolve({ statusCode: 201, response: response });
         });
        
