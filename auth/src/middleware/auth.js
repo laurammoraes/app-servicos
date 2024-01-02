@@ -41,7 +41,7 @@ async function dataUser(decodedJwt){
         const user = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
        
         const response = {
-            email: user.UserAttributes[3].Value,
+            email: user.UserAttributes[4].Value,
             username: user.Username
         } 
        
