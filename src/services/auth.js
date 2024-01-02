@@ -2,7 +2,11 @@ const { config } = require('dotenv');
 const AWS = require('aws-sdk')
 const AwsConfig = require('../config/aws');
 const dynamo = require('../config/aws_dynamodb')
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const credentials = require('../config/aws_credentials')
+const { LocalStorage } = require('node-localstorage');
+const localStorage = new LocalStorage('./scratch');
+const axios = require('axios');
  
 
 function signUp(email, password,phone_number, agent = 'none') {
@@ -143,6 +147,69 @@ function deleteUser (user){
     
   })
 }
+
+function logout(user) {
+  return new Promise(async (resolve) => {
+  
+    const poolData = {
+      UserPoolId: credentials.userPoolId,
+      ClientId: credentials.clientId
+    };
+    const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+   
+  
+    // Obtendo os detalhes do usuário
+    const userData = {
+      Username: user.username,
+      Pool: userPool
+    };
+  
+    
+    // Criando o objeto CognitoUser
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    
+    // Verificando se o usuário está autenticado
+    const session = await new Promise((innerResolve, innerReject) => {
+      cognitoUser.getSession((err, session) => {
+        if (err) {
+          innerReject(err);
+        } else {
+          innerResolve(session);
+        }
+      });
+    });
+    
+    if (!session || !session.isValid()) {
+      console.log('User is not authenticated');
+      // Handle the case where the user is not authenticated, e.g., redirect to login page
+      return resolve({ success: false, message: 'User is not authenticated' });
+    }
+
+    // Limpar os tokens do armazenamento local
+    localStorage.removeItem('CognitoIdentityServiceProvider.' + credentials.clientId + '.LastAuthUser');
+    localStorage.removeItem('CognitoIdentityServiceProvider.' + credentials.clientId + '.' + user.username + '.idToken');
+    localStorage.removeItem('CognitoIdentityServiceProvider.' + credentials.clientId + '.' + user.username + '.accessToken');
+    localStorage.removeItem('CognitoIdentityServiceProvider.' + credentials.clientId + '.' + user.username + '.refreshToken');
+
+    delete axios.defaults.headers.common['Authorization'];
+
+
+    // Realizando o logout
+    cognitoUser.globalSignOut({
+      onSuccess: function (result) {
+        console.log('Sign-out successful', result);
+        return resolve({ success: true, message: 'Sign-out successful' });
+      },
+      onFailure: function (err) {
+        console.log('Error during sign-out', err);
+        return resolve({ success: false, message: 'Error during sign-out' });
+      }
+    });
+  });
+}
+
+
   
 module.exports = {
     signUp,
@@ -152,5 +219,6 @@ module.exports = {
     updatePassword,
     listUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    logout
 }

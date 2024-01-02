@@ -28,7 +28,7 @@
     "application/json"
   ],
   "paths": {
-    "/register": {
+    "/user": {
       "post": {
         "tags": [
           "User"
@@ -49,14 +49,19 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/user": {
+      },
       "get": {
         "tags": [
           "User"
         ],
         "description": "Endpoint for view data of user.",
+        "parameters": [
+          {
+            "name": "accesstoken",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -69,6 +74,11 @@
         ],
         "description": "Endpoint for update data for user.",
         "parameters": [
+          {
+            "name": "accesstoken",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "Update",
             "in": "body",
@@ -89,6 +99,13 @@
           "User"
         ],
         "description": "Endpoint for delete user.",
+        "parameters": [
+          {
+            "name": "accesstoken",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -187,6 +204,23 @@
           }
         }
       }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "accesstoken",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -219,14 +253,14 @@
           "type": "string",
           "example": "laurammoraes2@gmail.com"
         },
-        "code": {
+        "codeEmailVerify": {
           "type": "string",
           "example": "XXXX"
         }
       },
       "required": [
         "email",
-        "code"
+        "codeEmailVerify"
       ]
     },
     "LoginUser": {

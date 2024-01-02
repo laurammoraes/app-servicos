@@ -33,7 +33,7 @@ const doc = {
         },
         VerifyUser: {
             $email: "laurammoraes2@gmail.com",
-            $code:"XXXX"
+            $codeEmailVerify:"XXXX"
         },
         LoginUser: {
             $email: "laurammoraes2@gmail.com",

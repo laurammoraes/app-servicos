@@ -6,7 +6,7 @@ const router = express.Router();
 const auth = require('../middleware/auth')
 
 
-router.post('/register', async (req, res) => {
+router.post('/user', async (req, res) => {
 
      /* #swagger.tags = ['User']
            #swagger.description = 'Endpoint for user register.' */
@@ -123,6 +123,12 @@ router.post('/updatePassword', async (req, res) => {
     const code = req.body.code; 
     const newPassword = req.body.newPassword; 
     const response = await authService.updatePassword(email, code, newPassword);
+    res.json(response)
+})
+router.get('/logout', auth.verifyToken, async(req, res) => {
+    
+    const user = req.userId
+    const response = await authService.logout(user)
     res.json(response)
 })
 
