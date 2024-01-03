@@ -22,7 +22,11 @@ const doc = {
         {
             "name": "Auth",
             "description": "Endpoints Auth"
-        }
+        },
+        {
+            "name": "Service",
+            "description": "Endpoints Services"
+        },
     ],
     definitions: {
         
@@ -49,7 +53,18 @@ const doc = {
         }, 
         UpdateUser:{
             $newPhoneNumber: "+5519993419999"
-        }
+        },
+        DataService:{
+            $nameService: "Pintura de ambientes",
+            $descService: "Realização da pintura de ambientes internos e externos",
+            $priceMinService: "R$ 200,00",
+            $productService: "Tinta e pincel",
+            $avgTimeService: "50 minutos",
+            $categoryService: "Pintura"
+
+
+
+        },
     }
     
     

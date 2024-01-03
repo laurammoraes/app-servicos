@@ -11,11 +11,7 @@ if (envFound.error) {
 module.exports = {
   accessKey: process.env.AWS_ACCESS_KEY_ID,
   secretKey: process.env.AWS_SECRET_ACCESS_ID,
-  userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
-  clientId: process.env.AWS_COGNITO_CLIENT_ID, 
-  region: process.env.AWS_COGNITO_REGION,
-  identityPool: process.env.AWS_COGNITO_IDENTITY_POOL_ID,
-  tableName: process.env.TABLE_NAME_AUTH, 
+  tableName: process.env.TABLE_NAME_SERVICE, 
   port: parseInt(process.env.PORT,10 ),
   
 }

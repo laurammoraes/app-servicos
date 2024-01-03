@@ -1,5 +1,5 @@
-const config = require('./auth/src/config/aws_credentials');
-const routersAuth = require('./auth/src/routers/auth')
+const config = require('./src/config/aws_credentials');
+const routersAuth = require('./src/routers/auth')
 const express = require('express')
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
