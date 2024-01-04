@@ -12,8 +12,8 @@ async function startServer(){
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  app.use('/', routersAuth)
-  app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+  app.use('/auth', routersAuth)
+  app.use('/auth/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
   app.listen(config.port, err => {
     if(err){

@@ -32,6 +32,32 @@
         "description": "Endpoint for submit service.",
         "parameters": [
           {
+            "name": "accesstoken",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Register",
+            "in": "body",
+            "description": "Data for register",
+            "schema": {
+              "$ref": "#/definitions/DataService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Service"
+        ],
+        "description": "Endpoint for update service.",
+        "parameters": [
+          {
             "name": "Register",
             "in": "body",
             "description": "Data for register",
