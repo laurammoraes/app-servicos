@@ -31,7 +31,7 @@ router.post('/',auth.verifyToken, async (req, res) => {
     res.json(response)
 });
 
-router.put('/', async (req, res) => {
+router.put('/', auth.verifyToken, async (req, res) => {
 
     /* #swagger.tags = ['Service']
           #swagger.description = 'Endpoint for update service.' */
@@ -40,19 +40,19 @@ router.put('/', async (req, res) => {
           in: 'body',
               description: 'Data for register',
               type: 'string',
-              schema: { $ref: "#/definitions/DataService" }
+              schema: { $ref: "#/definitions/DataUpdateService" }
        } */
 
    var nameService = req.body.nameService;
-   var descService = req.body.descService;
-   var priceMinService = req.body.priceMinService;
-   var productService = req.body.productService;
-   var avgTimeService = req.body.avgTimeService;
-   var idCreateService = req.userId;
-   var categoryService = req.body.categoryService;
+   var newdescService = req.body.newdescService;
+   var newpriceMinService = req.body.newpriceMinService;
+   var newproductService = req.body.newproductService;
+   var newavgTimeService = req.body.newavgTimeService;
+   var idCreateService = req.userId.email;
+   var newcategoryService = req.body.newcategoryService;
    var key = nameService + idCreateService;
    
-   const response = await service.submitService(key, nameService, descService, priceMinService,productService,avgTimeService,idCreateService,categoryService);
+   const response = await service.updateService(key, nameService, newdescService, newpriceMinService,newproductService,newavgTimeService,idCreateService,newcategoryService);
    res.json(response)
 });
 

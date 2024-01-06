@@ -34,6 +34,17 @@ const doc = {
 
 
         },
+        DataUpdateService:{
+            $nameService: "Pintura de ambientes",
+            $newdescService: "Realização da pintura de ambientes internos e externos",
+            $newpriceMinService: "R$ 200,00",
+            $newproductService: "Tinta e pincel",
+            $newavgTimeService: "50 minutos",
+            $newcategoryService: "Pintura"
+
+
+
+        },
     }
     
     

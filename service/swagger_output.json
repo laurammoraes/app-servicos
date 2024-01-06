@@ -58,11 +58,16 @@
         "description": "Endpoint for update service.",
         "parameters": [
           {
+            "name": "accesstoken",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "Register",
             "in": "body",
             "description": "Data for register",
             "schema": {
-              "$ref": "#/definitions/DataService"
+              "$ref": "#/definitions/DataUpdateService"
             }
           }
         ],
@@ -110,6 +115,43 @@
         "productService",
         "avgTimeService",
         "categoryService"
+      ]
+    },
+    "DataUpdateService": {
+      "type": "object",
+      "properties": {
+        "nameService": {
+          "type": "string",
+          "example": "Pintura de ambientes"
+        },
+        "newdescService": {
+          "type": "string",
+          "example": "Realização da pintura de ambientes internos e externos"
+        },
+        "newpriceMinService": {
+          "type": "string",
+          "example": "R$ 200,00"
+        },
+        "newproductService": {
+          "type": "string",
+          "example": "Tinta e pincel"
+        },
+        "newavgTimeService": {
+          "type": "string",
+          "example": "50 minutos"
+        },
+        "newcategoryService": {
+          "type": "string",
+          "example": "Pintura"
+        }
+      },
+      "required": [
+        "nameService",
+        "newdescService",
+        "newpriceMinService",
+        "newproductService",
+        "newavgTimeService",
+        "newcategoryService"
       ]
     }
   }

@@ -17,10 +17,19 @@ function submitService(key, nameService, descService, priceMinService,productSer
         return resolve({ statusCode: 201, response: "Serviço cadastrado com sucesso"});
       
       });
+};
+
+function updateService(key, nameService, newdescService, newpriceMinService,newproductService,newavgTimeService,idCreateService,newcategoryService){
+    return new Promise((resolve) => {
+        dynamo.initDynamo();
+        dynamo.verifyUpdateService(key, nameService, newdescService, newpriceMinService,newproductService,newavgTimeService,idCreateService,newcategoryService)
+        return resolve({ statusCode: 201, response: "Serviço cadastrado com sucesso"});
+    })
 }
   
 
   
 module.exports = {
     submitService,
+    updateService
 }
