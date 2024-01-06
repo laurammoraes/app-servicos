@@ -23,7 +23,7 @@ router.post('/',auth.verifyToken, async (req, res) => {
     var priceMinService = req.body.priceMinService;
     var productService = req.body.productService;
     var avgTimeService = req.body.avgTimeService;
-    var idCreateService = req.userId;
+    var idCreateService = req.userId.email;
     var categoryService = req.body.categoryService;
     var key = nameService + idCreateService;
     
