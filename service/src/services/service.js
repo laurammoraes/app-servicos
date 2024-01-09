@@ -26,10 +26,20 @@ function updateService(key, nameService, newdescService, newpriceMinService,newp
         return resolve({ statusCode: 201, response: "Serviço cadastrado com sucesso"});
     })
 }
+
+function deleteService(key){
+    return new Promise((resolve) => {
+        dynamo.initDynamo();
+        dynamo.deleteService(key)
+        return resolve({ statusCode: 201, response: "Serviço cadastrado com sucesso"});
+    })
+}
+  
   
 
   
 module.exports = {
     submitService,
-    updateService
+    updateService,
+    deleteService
 }

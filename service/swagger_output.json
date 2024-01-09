@@ -76,6 +76,32 @@
             "description": "OK"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Service"
+        ],
+        "description": "Endpoint for update service.",
+        "parameters": [
+          {
+            "name": "accesstoken",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "Register",
+            "in": "body",
+            "description": "Data for register",
+            "schema": {
+              "$ref": "#/definitions/DataUpdateService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },

@@ -56,7 +56,25 @@ router.put('/', auth.verifyToken, async (req, res) => {
    res.json(response)
 });
 
+router.delete('/', auth.verifyToken, async(req, res) => {
+     /* #swagger.tags = ['Service']
+          #swagger.description = 'Endpoint for update service.' */
 
+    /* #swagger.parameters['Register'] = {
+          in: 'body',
+              description: 'Data for register',
+              type: 'string',
+              schema: { $ref: "#/definitions/DataUpdateService" }
+       } */
+
+    var nameService = req.body.nameService;
+    var idCreateService = req.userId.email;
+    var key = nameService + idCreateService;
+    
+    const response = await service.deleteService(key);
+    res.json(response)
+    
+})
 
 
 module.exports = router;

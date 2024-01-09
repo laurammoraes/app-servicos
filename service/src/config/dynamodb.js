@@ -104,10 +104,33 @@ async function updateService(key, nameService, newdescService, newpriceMinServic
 
 }
 
+async function deleteService(key){
+    var table = credentials.tableName;
+    var doc = new aws.DynamoDB.DocumentClient();
+    var values = {
+        TableName: table, 
+        Key:{
+            key: key
+        },
+       
+       
+        
+    }
+    await doc.delete(values, function(err, data){
+        if (err) {
+            console.error("Erro: ", JSON.stringify(err, null, 2));
+        } else {
+            console.log('Item deletado')
+        }
+    }).promise();
+
+}
+
 
 module.exports = {
     initDynamo,
     createService,
     updateService, 
     verifyUpdateService,
+    deleteService
   }
