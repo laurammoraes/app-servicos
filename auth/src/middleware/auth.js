@@ -39,12 +39,19 @@ async function dataUser(decodedJwt){
 
     try {
         const user = await cognitoIdentityServiceProvider.adminGetUser(params).promise();
-       
+        
+        user.UserAttributes.forEach(element => {
+            if(element.Name = "email"){
+                email = element.Value
+                return email
+            }
+        });
         const response = {
-            email: user.UserAttributes[4].Value,
+            email: email,
             username: user.Username
         } 
        
+        
         
         return response;
     } catch (error) {
