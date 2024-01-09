@@ -23,7 +23,7 @@ function updateService(key, nameService, newdescService, newpriceMinService,newp
     return new Promise((resolve) => {
         dynamo.initDynamo();
         dynamo.verifyUpdateService(key, nameService, newdescService, newpriceMinService,newproductService,newavgTimeService,idCreateService,newcategoryService)
-        return resolve({ statusCode: 201, response: "Serviço cadastrado com sucesso"});
+        return resolve({ statusCode: 201, response: "Serviço atualizado com sucesso"});
     })
 }
 
@@ -31,7 +31,7 @@ function deleteService(key){
     return new Promise((resolve) => {
         dynamo.initDynamo();
         dynamo.deleteService(key)
-        return resolve({ statusCode: 201, response: "Serviço cadastrado com sucesso"});
+        return resolve({ statusCode: 201, response: "Item deletado"});
     })
 }
   

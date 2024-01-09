@@ -116,14 +116,16 @@ async function deleteService(key){
        
         
     }
+
     await doc.delete(values, function(err, data){
         if (err) {
             console.error("Erro: ", JSON.stringify(err, null, 2));
         } else {
-            console.log('Item deletado')
+           console.log("item deletado")
+
         }
     }).promise();
-
+    
 }
 
 
