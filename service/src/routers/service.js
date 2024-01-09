@@ -58,13 +58,13 @@ router.put('/', auth.verifyToken, async (req, res) => {
 
 router.delete('/', auth.verifyToken, async(req, res) => {
      /* #swagger.tags = ['Service']
-          #swagger.description = 'Endpoint for update service.' */
+          #swagger.description = 'Endpoint for delete service.' */
 
-    /* #swagger.parameters['Register'] = {
+    /* #swagger.parameters['Delete'] = {
           in: 'body',
-              description: 'Data for register',
+              description: 'Data for delete',
               type: 'string',
-              schema: { $ref: "#/definitions/DataUpdateService" }
+              schema: { $ref: "#/definitions/DataDeleteService" }
        } */
 
     var nameService = req.body.nameService;
@@ -74,6 +74,26 @@ router.delete('/', auth.verifyToken, async(req, res) => {
     const response = await service.deleteService(key);
     res.json(response)
     
+})
+
+router.post('/list', auth.verifyToken, async(req, res) => {
+    /* #swagger.tags = ['Service']
+         #swagger.description = 'Endpoint for list especific service.' */
+
+   /* #swagger.parameters['Get'] = {
+         in: 'body',
+             description: 'Data for list service',
+             type: 'string',
+             schema: { $ref: "#/definitions/DataListService" }
+      } */
+
+   var nameService = req.body.nameService;
+   var idCreateService = req.userId.email;
+   var key = nameService + idCreateService;
+   
+   const response = await service.getService(key);
+   res.json(response)
+   
 })
 
 

@@ -128,11 +128,35 @@ async function deleteService(key){
     
 }
 
+async function getService(key){
+    var table = credentials.tableName;
+    var doc = new aws.DynamoDB.DocumentClient();
+    var values = {
+        TableName: table, 
+        Key:{
+            key: key
+        },
+       
+       
+        
+    }
+
+    const item = await doc.get(values, function(err, data){
+
+        return JSON.stringify(data)
+
+    }).promise();
+
+    return item
+    
+}
+
 
 module.exports = {
     initDynamo,
     createService,
     updateService, 
     verifyUpdateService,
-    deleteService
+    deleteService,
+    getService
   }

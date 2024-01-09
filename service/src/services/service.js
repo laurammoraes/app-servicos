@@ -34,6 +34,15 @@ function deleteService(key){
         return resolve({ statusCode: 201, response: "Item deletado"});
     })
 }
+
+function getService(key){
+    return new Promise(async (resolve) => {
+        dynamo.initDynamo();
+        const item = await dynamo.getService(key)
+        return resolve({ statusCode: 201, response: item});
+    })
+}
+  
   
   
 
@@ -41,5 +50,6 @@ function deleteService(key){
 module.exports = {
     submitService,
     updateService,
-    deleteService
+    deleteService,
+    getService
 }

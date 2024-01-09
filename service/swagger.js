@@ -45,6 +45,14 @@ const doc = {
 
 
         },
+        DataDeleteService:{
+            $nameService: "Pintura de ambientes",
+
+        },
+        DataListService:{
+            $nameService: "Pintura de ambientes",
+
+        },
     }
     
     
